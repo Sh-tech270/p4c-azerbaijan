@@ -6,14 +6,14 @@ import { getCourses } from '@/lib/db';
 import { Award, Layers, Sparkles } from 'lucide-react';
 
 interface CoursesPageProps {
-  searchParams: { track?: string };
+  searchParams: Promise<{ track?: string }>;
 }
 
 export const revalidate = 0;
 
 export default async function CoursesPage({ searchParams }: CoursesPageProps) {
   const allCourses = await getCourses();
-  const selectedTrack = searchParams?.track;
+  const { track: selectedTrack } = await searchParams;
 
   const filteredCourses = selectedTrack
     ? allCourses.filter((c) => c.track === selectedTrack)
