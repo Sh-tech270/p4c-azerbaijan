@@ -7,7 +7,7 @@ import { getNews } from '@/lib/db';
 import { Calendar, User, ArrowLeft, Share2, ChevronRight } from 'lucide-react';
 
 interface NewsDetailPageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 export const revalidate = 0;
@@ -20,9 +20,8 @@ export async function generateStaticParams() {
 }
 
 export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
-  const { slug } = await params;
   const newsList = await getNews();
-  const article = newsList.find((n) => n.slug === slug);
+  const article = newsList.find((n) => n.slug === params.slug);
 
   if (!article) {
     notFound();

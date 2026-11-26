@@ -14,12 +14,10 @@ export default function InstructorCard({ instructor }: InstructorCardProps) {
     <div className="flex flex-col bg-white rounded-3xl border border-slate-200/80 p-6 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 group">
       {/* Profile Photo */}
       <div className="relative w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-slate-100 shadow-md group-hover:border-p4c-cyan/50 transition">
-        <Image
-          src={instructor.photo_url}
+        <img
+          src={instructor.photo_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80'}
           alt={instructor.full_name}
-          fill
-          sizes="112px"
-          className="object-cover group-hover:scale-105 transition duration-300"
+          className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
         />
       </div>
 

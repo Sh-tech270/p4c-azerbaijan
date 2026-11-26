@@ -156,6 +156,28 @@ export interface QuizResultProfile {
   recommended_course_title: string;
 }
 
+export type ResourceCategory =
+  | 'Metodik Vəsait'
+  | 'Kitab'
+  | 'Atelye Materialı'
+  | 'Təlimçi Bələdçisi'
+  | 'Tədqiqat və Məqalə';
+
+export interface ResourceItem {
+  id: string;
+  title: string;
+  category: ResourceCategory;
+  description: string;
+  file_format: 'PDF' | 'DOCX' | 'ZIP';
+  file_size: string;
+  download_url: string;
+  cover_url?: string;
+  author?: string;
+  published_year?: string;
+  pages?: number;
+  featured?: boolean;
+}
+
 export interface SiteSettings {
   org_name: string;
   tagline: string;
@@ -171,4 +193,28 @@ export interface SiteSettings {
   linkedin: string;
   youtube: string;
   announcement_bar?: string;
+
+  // Editable Section Titles & Subtitles
+  section_about_title?: string;
+  section_about_subtitle?: string;
+  section_mission_title?: string;
+  section_mission_subtitle?: string;
+  section_activities_title?: string;
+  section_activities_subtitle?: string;
+  section_courses_title?: string;
+  section_courses_subtitle?: string;
+  section_instructors_title?: string;
+  section_instructors_subtitle?: string;
+  section_projects_title?: string;
+  section_projects_subtitle?: string;
+  section_news_title?: string;
+  section_news_subtitle?: string;
+  section_resources_title?: string;
+  section_resources_subtitle?: string;
+  section_graduates_title?: string;
+  section_graduates_subtitle?: string;
+  section_videos_title?: string;
+  section_videos_subtitle?: string;
+  section_cta_title?: string;
+  section_cta_subtitle?: string;
 }

@@ -206,6 +206,22 @@ export default function Navbar() {
                 Layihələr
               </Link>
 
+              {/* Xəbərlər */}
+              <Link
+                href={isHomePage ? '#xeberler' : '/xeberler'}
+                className="px-2.5 py-1.5 rounded-lg hover:text-[#0B357B] hover:bg-slate-50 transition"
+              >
+                Xəbərlər
+              </Link>
+
+              {/* Kitablar və Resurslar */}
+              <Link
+                href={isHomePage ? '#resurslar' : '/resurslar'}
+                className="px-2.5 py-1.5 rounded-lg hover:text-[#0B357B] hover:bg-slate-50 transition"
+              >
+                Kitablar
+              </Link>
+
               {/* Videolar */}
               <Link
                 href={isHomePage ? '#videolar' : '/videolar'}
@@ -227,10 +243,11 @@ export default function Navbar() {
             <div className="hidden sm:flex items-center space-x-2 shrink-0">
               <Link
                 href={isHomePage ? '#muraciet' : '/muraciet'}
+                style={{ backgroundColor: '#0B357B', color: '#ffffff' }}
                 className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-white bg-[#0B357B] hover:bg-[#14499E] shadow-sm hover:shadow transition"
               >
-                <span>Kursa Müraciət Et</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span style={{ color: '#ffffff' }}>Kursa Müraciət Et</span>
+                <ArrowRight className="w-3.5 h-3.5 text-white" style={{ color: '#ffffff' }} />
               </Link>
             </div>
 
@@ -295,6 +312,12 @@ export default function Navbar() {
               className="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-800 hover:bg-slate-50"
             >
               Xəbərlər və Bloq
+            </Link>
+            <Link
+              href="/resurslar"
+              className="block px-3 py-2 rounded-lg text-sm font-semibold text-slate-800 hover:bg-slate-50"
+            >
+              Kitablar və Resurslar
             </Link>
             <Link
               href="/videolar"

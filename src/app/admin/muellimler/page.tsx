@@ -113,12 +113,10 @@ export default function InstructorsAdminPage() {
             >
               <div className="space-y-3 text-center">
                 <div className="relative w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-p4c-cyan">
-                  <Image
-                    src={inst.photo_url}
+                  <img
+                    src={inst.photo_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80'}
                     alt={inst.full_name}
-                    fill
-                    sizes="96px"
-                    className="object-cover"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <div>
@@ -191,9 +189,52 @@ export default function InstructorsAdminPage() {
               </div>
 
               <div>
-                <label className="block font-bold text-slate-700 uppercase mb-1">Foto URL (Unsplash və ya şəkil linki)</label>
+                <label className="block font-bold text-slate-700 uppercase mb-1">Müəllimin Fotosu</label>
+                <div className="flex items-center space-x-3 mb-2">
+                  {editingInst.photo_url && (
+                    <img
+                      src={editingInst.photo_url}
+                      alt="Önbaxış"
+                      className="w-14 h-14 rounded-full object-cover border-2 border-[#00B4D8] shadow-sm"
+                    />
+                  )}
+                  <label className="cursor-pointer inline-flex items-center space-x-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl border border-slate-300 transition">
+                    <span>📁 Kompüterdən Şəkil Seç</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          const reader = new FileReader();
+                          reader.onloadend = () => {
+                            setEditingInst({ ...editingInst, photo_url: reader.result as string });
+                          };
+                          reader.readAsDataURL(file);
+                        }
+                      }}
+                    />
+                  </label>
+                  {editingInst.photo_url && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setEditingInst({
+                          ...editingInst,
+                          photo_url:
+                            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+                        })
+                      }
+                      className="px-2.5 py-2 text-[11px] text-slate-500 hover:text-red-600 bg-slate-50 hover:bg-red-50 rounded-xl border border-slate-200 transition"
+                    >
+                      Şəkli Sıfırla
+                    </button>
+                  )}
+                </div>
                 <input
                   type="text"
+                  placeholder="və ya birbaşa şəkil linki (URL)"
                   value={editingInst.photo_url}
                   onChange={(e) => setEditingInst({ ...editingInst, photo_url: e.target.value })}
                   className="w-full px-3 py-2 rounded-xl border border-slate-300"

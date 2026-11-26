@@ -17,6 +17,7 @@ import {
   KeyRound,
   CheckCircle2,
   Lock,
+  FileText,
 } from 'lucide-react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -126,6 +127,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     { name: 'Müraciətlər', href: '/admin/muracietler', icon: Inbox },
     { name: 'Kursların İdarəsi', href: '/admin/kurslar', icon: BookOpen },
     { name: 'Müəllimlər', href: '/admin/muellimler', icon: Users },
+    { name: 'Kitab və Resurslar', href: '/admin/resurslar', icon: FileText },
     { name: 'Statistika', href: '/admin/statistika', icon: BarChart3 },
     { name: 'Sayt Parametrləri', href: '/admin/tenzimlemeler', icon: Settings },
   ];

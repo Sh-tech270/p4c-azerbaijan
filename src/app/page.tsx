@@ -7,6 +7,7 @@ import PartnerCarousel from '@/components/PartnerCarousel';
 import CourseCard from '@/components/CourseCard';
 import InstructorCard from '@/components/InstructorCard';
 import VideoSection from '@/components/VideoSection';
+import ResourcesSection from '@/components/ResourcesSection';
 import Image from 'next/image';
 import {
   getCourses,
@@ -18,6 +19,7 @@ import {
   getGraduateStories,
   getVideos,
   getSettings,
+  getResources,
 } from '@/lib/db';
 import {
   Brain,
@@ -46,6 +48,7 @@ export default async function HomePage() {
     graduates,
     videos,
     settings,
+    resources,
   ] = await Promise.all([
     getCourses(),
     getInstructors(),
@@ -56,6 +59,7 @@ export default async function HomePage() {
     getGraduateStories(),
     getVideos(),
     getSettings(),
+    getResources(),
   ]);
 
   return (
@@ -83,15 +87,23 @@ export default async function HomePage() {
               </div>
 
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
-                Philosophy for Children: <br />
-                <span className="text-gradient">Əzbərçilikdən Dərin Fəlsəfi Təfəkkürə</span>
+                {settings.section_about_title || (
+                  <>
+                    Philosophy for Children: <br />
+                    <span className="text-gradient">Əzbərçilikdən Dərin Fəlsəfi Təfəkkürə</span>
+                  </>
+                )}
               </h2>
 
               <p className="text-slate-600 text-base leading-relaxed">
-                Philosophy for Children (P4C) uşaqların və gənclərin doğuşdan gələn maraq və sualvermə
-                qabiliyyətini Sokratik dialoqla inkişaf etdirən beynəlxalq təhsil modelidir. Burada uşaqlar
-                hazır cavabları deyil, <strong>Community of Inquiry (Araşdırma İcması)</strong> çərçivəsində
-                öz arqumentlərini qurmağı öyrənirlər.
+                {settings.section_about_subtitle || (
+                  <>
+                    Philosophy for Children (P4C) uşaqların və gənclərin doğuşdan gələn maraq və sualvermə
+                    qabiliyyətini Sokratik dialoqla inkişaf etdirən beynəlxalq təhsil modelidir. Burada uşaqlar
+                    hazır cavabları deyil, <strong>Community of Inquiry (Araşdırma İcması)</strong> çərçivəsində
+                    öz arqumentlərini qurmağı öyrənirlər.
+                  </>
+                )}
               </p>
 
               <div className="grid grid-cols-2 gap-4 pt-2">
@@ -190,12 +202,11 @@ export default async function HomePage() {
                   Milli Təhsil Missiyası
                 </span>
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
-                  Azərbaycan Təhsil Mühitində Yeni Bir Dialoq Mədəniyyəti
+                  {settings.section_mission_title || 'Azərbaycan Təhsil Mühitində Yeni Bir Dialoq Mədəniyyəti'}
                 </h2>
                 <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                  İnformasiya bolluğu və süni intellekt əsrində əzbərçi bilik köhnəlir, lakin düzgün sual vermək,
-                  analiz etmək və etik qərar vermək qabiliyyəti ən ali səriştəyə çevrilir. P4C Azərbaycan olaraq biz
-                  bu bacarıqları ibtidai siniflərdən universitet və şirkət komandalarına qədər sistemli şəkildə formalaşdırırıq.
+                  {settings.section_mission_subtitle ||
+                    'İnformasiya bolluğu və süni intellekt əsrində əzbərçi bilik köhnəlir, lakin düzgün sual vermək, analiz etmək və etik qərar vermək qabiliyyəti ən ali səriştəyə çevrilir. P4C Azərbaycan olaraq biz bu bacarıqları ibtidai siniflərdən universitet və şirkət komandalarına qədər sistemli şəkildə formalaşdırırıq.'}
                 </p>
               </div>
             </div>
@@ -209,8 +220,11 @@ export default async function HomePage() {
               Strateji Fəaliyyət Sahələri
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">
-              Fəaliyyətimizin Əsas İstiqamətləri
+              {settings.section_activities_title || 'Fəaliyyətimizin Əsas İstiqamətləri'}
             </h2>
+            {settings.section_activities_subtitle && (
+              <p className="text-xs sm:text-sm text-slate-500">{settings.section_activities_subtitle}</p>
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -265,7 +279,7 @@ export default async function HomePage() {
                   Tədris Proqramlarımız
                 </span>
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-1">
-                  Seçilmiş Kurs və Atelyelər
+                  {settings.section_courses_title || 'Seçilmiş Kurs və Atelyelər'}
                 </h2>
               </div>
               <a
@@ -293,7 +307,7 @@ export default async function HomePage() {
                 Ekspert Komandamız
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-1">
-                Müəllimlərimiz və Təlimçilərimiz
+                {settings.section_instructors_title || 'Müəllimlərimiz və Təlimçilərimiz'}
               </h2>
             </div>
             <a
@@ -321,7 +335,7 @@ export default async function HomePage() {
                   Real Fəaliyyətlər
                 </span>
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-1">
-                  Layihələrimiz
+                  {settings.section_projects_title || 'Layihələrimiz'}
                 </h2>
               </div>
               <a
@@ -373,7 +387,7 @@ export default async function HomePage() {
                 Yeniliklər və Bloq
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-1">
-                Son Xəbərlər və Məqalələr
+                {settings.section_news_title || 'Son Xəbərlər və Məqalələr'}
               </h2>
             </div>
             <a
@@ -426,6 +440,13 @@ export default async function HomePage() {
           </div>
         </section>
 
+        {/* SECTION: RESURSLAR VƏ KİTABLAR */}
+        <ResourcesSection
+          resources={resources}
+          title={settings.section_resources_title}
+          subtitle={settings.section_resources_subtitle}
+        />
+
         {/* SECTION 9: MƏZUNLARIMIZIN HEKAYƏLƏRİ */}
         <section id="mezunlar" className="py-20 bg-slate-900 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
@@ -434,7 +455,7 @@ export default async function HomePage() {
                 Real Təcrübələr
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
-                Məzunlarımızın Hekayələri
+                {settings.section_graduates_title || 'Məzunlarımızın Hekayələri'}
               </h2>
             </div>
 
@@ -491,13 +512,17 @@ export default async function HomePage() {
             </div>
 
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-              Daha yaxşı suallar, daha dərin düşüncə. <br />
-              <span className="text-p4c-cyan">P4C Ailəsinə Qoşulun!</span>
+              {settings.section_cta_title || (
+                <>
+                  Daha yaxşı suallar, daha dərin düşüncə. <br />
+                  <span className="text-p4c-cyan">P4C Ailəsinə Qoşulun!</span>
+                </>
+              )}
             </h2>
 
             <p className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-              Müəllim, valideyn, gənc və ya təhsil rəhbəri olmağınızdan asılı olmayaraq,
-              P4C metodologiyası düşüncə tərzinizə yeni bir nəfəs verəcək.
+              {settings.section_cta_subtitle ||
+                'Müəllim, valideyn, gənc və ya təhsil rəhbəri olmağınızdan asılı olmayaraq, P4C metodologiyası düşüncə tərzinizə yeni bir nəfəs verəcək.'}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">

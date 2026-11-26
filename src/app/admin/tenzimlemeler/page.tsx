@@ -2,7 +2,17 @@
 
 import React, { useState, useEffect } from 'react';
 import { SiteSettings } from '@/lib/types';
-import { Settings, Save, CheckCircle2, ShieldCheck, Phone, Mail, Globe } from 'lucide-react';
+import {
+  Settings,
+  Save,
+  CheckCircle2,
+  ShieldCheck,
+  Phone,
+  Mail,
+  Globe,
+  LayoutTemplate,
+  BookOpen,
+} from 'lucide-react';
 
 export default function SettingsAdminPage() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
@@ -141,6 +151,251 @@ export default function SettingsAdminPage() {
               onChange={(e) => setSettings({ ...settings, hero_badge: e.target.value })}
               className="w-full px-3 py-2 rounded-xl border border-slate-300"
             />
+          </div>
+        </div>
+
+        {/* Section Headings & Subtitles */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-5">
+          <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center space-x-2">
+            <LayoutTemplate className="w-4 h-4 text-[#0B357B]" />
+            <span>Ana Səhifə Bölmə Başlıqları</span>
+          </h2>
+          <p className="text-xs text-slate-500">
+            Ana səhifədəki hər bir blokun əsas başlığını və izah mətnini buradan rahatlıqla dəyişə bilərsiniz.
+          </p>
+
+          <div className="space-y-4 pt-2">
+            {/* Section 1: Haqqında */}
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 space-y-3">
+              <div className="font-bold text-slate-800 text-xs uppercase text-[#0B357B]">
+                1. P4C Metodologiyası (Haqqında Bölməsi)
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Başlığı</label>
+                  <input
+                    type="text"
+                    value={settings.section_about_title || ''}
+                    placeholder="Philosophy for Children: Əzbərçilikdən Dərin Fəlsəfi Təfəkkürə"
+                    onChange={(e) => setSettings({ ...settings, section_about_title: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Açıqlaması</label>
+                  <input
+                    type="text"
+                    value={settings.section_about_subtitle || ''}
+                    placeholder="P4C uşaqların doğuşdan gələn maraq və sualvermə qabiliyyətini inkişaf etdirir..."
+                    onChange={(e) => setSettings({ ...settings, section_about_subtitle: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section 2: Təşkilat Missiyası */}
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 space-y-3">
+              <div className="font-bold text-slate-800 text-xs uppercase text-[#0B357B]">
+                2. P4C Azərbaycan Missiyası
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Başlığı</label>
+                  <input
+                    type="text"
+                    value={settings.section_mission_title || ''}
+                    placeholder="Azərbaycan Təhsil Mühitində Yeni Bir Dialoq Mədəniyyəti"
+                    onChange={(e) => setSettings({ ...settings, section_mission_title: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Açıqlaması</label>
+                  <input
+                    type="text"
+                    value={settings.section_mission_subtitle || ''}
+                    placeholder="İnformasiya bolluğu və süni intellekt əsrində əzbərçi bilik köhnəlir..."
+                    onChange={(e) => setSettings({ ...settings, section_mission_subtitle: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section 3: Fəaliyyətlər */}
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 space-y-3">
+              <div className="font-bold text-slate-800 text-xs uppercase text-[#0B357B]">
+                3. Fəaliyyət Sahələri
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Başlığı</label>
+                  <input
+                    type="text"
+                    value={settings.section_activities_title || ''}
+                    placeholder="Fəaliyyətimizin Əsas İstiqamətləri"
+                    onChange={(e) => setSettings({ ...settings, section_activities_title: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Açıqlaması</label>
+                  <input
+                    type="text"
+                    value={settings.section_activities_subtitle || ''}
+                    placeholder="Təlimçi hazırlığı, məktəb dərnəkləri və valideyn atelyeləri..."
+                    onChange={(e) => setSettings({ ...settings, section_activities_subtitle: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section 4: Kurslar */}
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 space-y-3">
+              <div className="font-bold text-slate-800 text-xs uppercase text-[#0B357B]">
+                4. Kurslar və Tədris Proqramları
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Başlığı</label>
+                  <input
+                    type="text"
+                    value={settings.section_courses_title || ''}
+                    placeholder="Seçilmiş Kurs və Atelyelər"
+                    onChange={(e) => setSettings({ ...settings, section_courses_title: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Açıqlaması</label>
+                  <input
+                    type="text"
+                    value={settings.section_courses_subtitle || ''}
+                    placeholder="Təlimçi sertifikasiyası və fəlsəfə atelyeləri proqramları..."
+                    onChange={(e) => setSettings({ ...settings, section_courses_subtitle: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section 5: Müəllimlər */}
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 space-y-3">
+              <div className="font-bold text-slate-800 text-xs uppercase text-[#0B357B]">
+                5. Müəllimlər və Təlimçilər
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Başlığı</label>
+                  <input
+                    type="text"
+                    value={settings.section_instructors_title || ''}
+                    placeholder="Müəllimlərimiz və Təlimçilərimiz"
+                    onChange={(e) => setSettings({ ...settings, section_instructors_title: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Açıqlaması</label>
+                  <input
+                    type="text"
+                    value={settings.section_instructors_subtitle || ''}
+                    placeholder="Azərbaycanda P4C təlimçiləri və fasilatatorları..."
+                    onChange={(e) => setSettings({ ...settings, section_instructors_subtitle: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section 6: Resurslar və Kitablar */}
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 space-y-3">
+              <div className="font-bold text-slate-800 text-xs uppercase text-[#0B357B]">
+                6. Kitablar və Resurslar
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Başlığı</label>
+                  <input
+                    type="text"
+                    value={settings.section_resources_title || ''}
+                    placeholder="Kitablar və Metodik Resurslar"
+                    onChange={(e) => setSettings({ ...settings, section_resources_title: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Açıqlaması</label>
+                  <input
+                    type="text"
+                    value={settings.section_resources_subtitle || ''}
+                    placeholder="Azərbaycan dilində rəsmi P4C bələdçiləri və vəsaitlər..."
+                    onChange={(e) => setSettings({ ...settings, section_resources_subtitle: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section 7: Layihələr */}
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 space-y-3">
+              <div className="font-bold text-slate-800 text-xs uppercase text-[#0B357B]">
+                7. Layihələrimiz
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Başlığı</label>
+                  <input
+                    type="text"
+                    value={settings.section_projects_title || ''}
+                    placeholder="Layihələrimiz"
+                    onChange={(e) => setSettings({ ...settings, section_projects_title: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Açıqlaması</label>
+                  <input
+                    type="text"
+                    value={settings.section_projects_subtitle || ''}
+                    placeholder="Məktəb və dərnəklərdəki fəlsəfi təşəbbüslərimiz..."
+                    onChange={(e) => setSettings({ ...settings, section_projects_subtitle: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section 8: Xəbərlər */}
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 space-y-3">
+              <div className="font-bold text-slate-800 text-xs uppercase text-[#0B357B]">
+                8. Xəbərlər və Bloq
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Başlığı</label>
+                  <input
+                    type="text"
+                    value={settings.section_news_title || ''}
+                    placeholder="Son Xəbərlər və Məqalələr"
+                    onChange={(e) => setSettings({ ...settings, section_news_title: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">Bölmə Açıqlaması</label>
+                  <input
+                    type="text"
+                    value={settings.section_news_subtitle || ''}
+                    placeholder="P4C dünyasından yeniliklər və elanlar..."
+                    onChange={(e) => setSettings({ ...settings, section_news_subtitle: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

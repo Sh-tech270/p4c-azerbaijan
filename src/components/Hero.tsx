@@ -66,25 +66,26 @@ export default function Hero({
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-4">
               <a
                 href="/kurslar"
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-7 py-3.5 rounded-xl font-semibold text-white bg-p4c-navy hover:bg-p4c-navy-light shadow-lg shadow-p4c-navy/25 hover:shadow-xl transition-all"
+                style={{ backgroundColor: '#0B357B', color: '#ffffff' }}
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-7 py-3.5 rounded-xl font-bold text-white bg-[#0B357B] hover:bg-[#14499E] shadow-lg shadow-blue-900/25 hover:shadow-xl transition-all"
               >
-                <span>Kurslara Bax</span>
-                <ArrowRight className="w-4 h-4" />
+                <span style={{ color: '#ffffff' }}>Kurslara Bax</span>
+                <ArrowRight className="w-4 h-4 text-white" style={{ color: '#ffffff' }} />
               </a>
 
               <a
                 href="/test"
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-xl font-semibold text-p4c-navy bg-white hover:bg-blue-50/70 border border-blue-200/80 shadow-sm transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-xl font-bold text-[#0B357B] bg-white hover:bg-blue-50/70 border border-blue-200/80 shadow-sm transition-all"
               >
-                <Sparkles className="w-4 h-4 text-p4c-cyan" />
+                <Sparkles className="w-4 h-4 text-[#00B4D8]" />
                 <span>Özünü Kəşf Testi</span>
               </a>
 
               <a
                 href="/haqqimizda/p4c"
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-xl font-semibold text-slate-700 hover:text-p4c-navy hover:bg-slate-100/70 transition"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-6 py-3.5 rounded-xl font-semibold text-slate-700 hover:text-[#0B357B] hover:bg-slate-100/70 transition"
               >
-                <BookOpen className="w-4 h-4 text-slate-400" />
+                <BookOpen className="w-4 h-4 text-slate-500" />
                 <span>P4C Nədir?</span>
               </a>
             </div>

@@ -5,7 +5,31 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { initialQuizQuestions, quizResultProfiles } from '@/lib/mock-data';
 import { Sparkles, ArrowRight, RotateCcw, Share2, CheckCircle2, AlertCircle, Award } from 'lucide-react';
-import confetti from 'canvas-confetti';
+
+// Lightweight zero-dependency celebration animation
+function triggerCelebration() {
+  if (typeof window === 'undefined') return;
+  const colors = ['#0B357B', '#00B4D8', '#48CAE4', '#FFD166', '#06D6A0'];
+  for (let i = 0; i < 35; i++) {
+    const el = document.createElement('div');
+    el.style.position = 'fixed';
+    el.style.width = '10px';
+    el.style.height = '10px';
+    el.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    el.style.left = `${Math.random() * 90 + 5}vw`;
+    el.style.top = '-10px';
+    el.style.borderRadius = '50%';
+    el.style.pointerEvents = 'none';
+    el.style.zIndex = '99999';
+    el.style.transition = 'transform 2.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 2.2s ease-out';
+    document.body.appendChild(el);
+    setTimeout(() => {
+      el.style.transform = `translateY(${window.innerHeight * 0.75}px) rotate(${Math.random() * 360}deg)`;
+      el.style.opacity = '0';
+    }, 20);
+    setTimeout(() => el.remove(), 2400);
+  }
+}
 
 export default function QuizPage() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -41,16 +65,8 @@ export default function QuizPage() {
       setCurrentStep(currentStep + 1);
     } else {
       setCompleted(true);
-      // Trigger confetti celebration
-      try {
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 },
-        });
-      } catch (e) {
-        // Safe fallback
-      }
+      // Trigger celebration
+      triggerCelebration();
     }
   };
 

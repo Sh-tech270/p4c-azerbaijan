@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 interface CourseDetailPageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 export const revalidate = 0;
@@ -31,8 +31,7 @@ export async function generateStaticParams() {
 }
 
 export default async function CourseDetailPage({ params }: CourseDetailPageProps) {
-  const { slug } = await params;
-  const course = await getCourseBySlug(slug);
+  const course = await getCourseBySlug(params.slug);
 
   if (!course) {
     notFound();

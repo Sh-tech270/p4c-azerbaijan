@@ -11,6 +11,7 @@ import {
   initialQuizQuestions,
   initialSettings,
   initialApplications,
+  initialResources,
 } from './mock-data';
 import {
   Course,
@@ -23,6 +24,7 @@ import {
   VideoItem,
   SiteSettings,
   CourseApplication,
+  ResourceItem,
 } from './types';
 
 // Supabase client initialization (if keys are provided)
@@ -49,6 +51,7 @@ interface GlobalStore {
   videos: VideoItem[];
   settings: SiteSettings;
   applications: CourseApplication[];
+  resources: ResourceItem[];
 }
 
 declare global {
@@ -68,6 +71,7 @@ if (!globalThis.__P4C_GLOBAL_STORE__) {
     videos: [...initialVideos],
     settings: { ...initialSettings },
     applications: [...initialApplications],
+    resources: [...initialResources],
   };
 }
 
@@ -260,4 +264,49 @@ export const updateApplicationStatus = async (
   }
 
   return app;
+};
+
+// --- RESOURCES & BOOKS DATA ACCESS ---
+
+export const getResources = async (): Promise<ResourceItem[]> => {
+  if (isSupabaseConfigured && supabase) {
+    const { data, error } = await supabase.from('resources').select('*').order('id', { ascending: false });
+    if (!error && data && data.length > 0) return data as ResourceItem[];
+  }
+  return getStore().resources;
+};
+
+export const getResourceById = async (id: string): Promise<ResourceItem | null> => {
+  if (isSupabaseConfigured && supabase) {
+    const { data, error } = await supabase.from('resources').select('*').eq('id', id).single();
+    if (!error && data) return data as ResourceItem;
+  }
+  return getStore().resources.find((r) => r.id === id) || null;
+};
+
+export const saveResource = async (resource: ResourceItem): Promise<ResourceItem> => {
+  if (isSupabaseConfigured && supabase) {
+    await supabase.from('resources').upsert(resource);
+  }
+  const store = getStore();
+  const index = store.resources.findIndex((r) => r.id === resource.id);
+  if (index >= 0) {
+    store.resources[index] = resource;
+  } else {
+    store.resources.unshift(resource);
+  }
+  return resource;
+};
+
+export const deleteResource = async (id: string): Promise<boolean> => {
+  if (isSupabaseConfigured && supabase) {
+    await supabase.from('resources').delete().eq('id', id);
+  }
+  const store = getStore();
+  const index = store.resources.findIndex((r) => r.id === id);
+  if (index >= 0) {
+    store.resources.splice(index, 1);
+    return true;
+  }
+  return false;
 };
